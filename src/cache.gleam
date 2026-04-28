@@ -155,24 +155,7 @@ pub fn get_keys_http(uri: String) {
 /// 
 @internal
 pub fn get_keys(jwks_uri: String) {
-  let ets_ = case table.ref("oauth_client_gleam") {
-    Ok(cache) -> {
-      echo "old table"
-      cache
-    }
-    Error(_) -> {
-      let assert Ok(cache_) =
-        table.build("oauth_client_gleam")
-        |> table.privacy(table.Public)
-        |> table.write_concurrency(table.AutoWriteConcurrency)
-        |> table.read_concurrency(True)
-        |> table.decentralized_counters(True)
-        |> table.compression(False)
-        |> table.set
-      echo "new table"
-      cache_
-    }
-  }
+  let assert Ok(ets_) = table.ref("oauth_client_gleam")
   let object = table.lookup(ets_, jwks_uri)
   let resp = case object {
     [#(_, #(expiry, keys))] -> {
@@ -212,4 +195,19 @@ pub fn cleanup() {
   result.try(table.ref("oauth_client_gleam"), fn(set) {
     table.drop(set) |> Ok()
   })
+}
+
+/// Create ets table 
+/// 
+@internal
+pub fn init() {
+  let assert Ok(cache_) =
+    table.build("oauth_client_gleam")
+    |> table.privacy(table.Public)
+    |> table.write_concurrency(table.AutoWriteConcurrency)
+    |> table.read_concurrency(True)
+    |> table.decentralized_counters(True)
+    |> table.compression(False)
+    |> table.set
+  cache_
 }

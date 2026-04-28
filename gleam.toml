@@ -17,7 +17,7 @@ gleam_regexp = ">= 1.1.1 and < 2.0.0"
 gleam_json = ">= 3.1.0 and < 4.0.0"
 gleam_time = ">= 1.8.0 and < 2.0.0"
 carpenter = { git = "https://github.com/janwirth/carpenter.git", ref = "ec577062ede534c06de81f4d64e1385cf369c0f8" }
-gleam_otp = ">= 1.2.0 and < 2.0.0"
+
 
 [dev_dependencies]
 gleeunit = ">= 1.0.0 and < 2.0.0"

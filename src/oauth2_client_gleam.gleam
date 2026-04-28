@@ -245,3 +245,9 @@ pub fn decode_unverified_jwt_token_as(
 pub fn cleanup_cache() {
   cache.cleanup()
 }
+
+/// Create ets table for caching certificates
+/// 
+pub fn init() {
+  cache.init()
+}
