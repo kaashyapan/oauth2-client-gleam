@@ -37,7 +37,10 @@ import gose/jose/jwt
 import oauth2_client_gleam.{Google} as src
 
 pub fn main() -> Nil {
-  
+  // initiate the jwks keys cache outside your supervision tree
+
+    auth.init()
+
   // Make a client configuration
   
   let client_config =
